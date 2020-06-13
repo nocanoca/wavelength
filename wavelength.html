@@ -1,0 +1,327 @@
+<html>
+<head>
+<style>
+
+
+
+/*this is the slider its self */
+.slider{
+    vertical-align: middle;
+}
+
+
+/* this is the box that contains everything about the slider */
+#slidercontainer{
+	width: 80%;	
+	padding: 10px;
+	border: 1px dashed;
+    margin: 0 auto;
+    display: flex;
+    align-items: center; 
+	
+}
+
+/* this is the legends for the slider */
+.rangediv {
+	width: 15%;
+	overflow: hidden;
+    font-variant: small-caps;
+	word-wrap: break-word;
+    margin: auto;
+	
+
+}
+
+/* wrapper for the slider and the goal */
+#sliderwrapper {
+	padding-top: 1em;
+	width: 60%;
+	
+	max-width: 60%;
+	font-size: 10;
+	text-align: left;
+}
+
+/* div that holds the goal */
+#goal {
+	display: inline;
+	padding-left: calc(var(--targetval) - 0.8%);
+}
+
+/* this holds the target value for the css, which effects how the slider's background is styled */
+:root {
+	--targetval: 50%;
+}
+
+body {
+	text-align: center;
+	font-family: "Georgia", serif;
+}
+
+#currentgame{
+	height: 20px;
+	display: none;
+}
+
+#teamguess {
+	border: 1px dashed;
+	padding: 10px;
+	border: 1px dashed;
+    margin: 0 auto;
+    display: flex;
+	flex-direction: column;
+    align-items: center; 
+	width: 80%;
+}
+
+#guessnumber {
+	width: 2em;
+	max-width: 2em;
+	min-width: 2em;
+	
+	height: 2em;
+	max-height: 2em;
+	min-height: 2em;
+	
+	text-align: center;
+	font-size: 60pt;
+	font-family: "Georgia", serif;
+	border: none;
+	background: #fffbcf;
+}
+
+h1 {
+	font-weight: normal;
+	font-variant: small-caps;
+    text-decoration: underline;
+	text-decoration-style: wavy;
+}
+
+h2 {
+	font-weight: normal;
+	font-variant: small-caps;
+}
+
+button {
+    -webkit-appearance: none;
+	
+    background-color: #ffffff; /
+     border: 1px dashed black;
+     padding: 15px 32px;
+ 	font-variant: small-caps;
+	font-family: "Georgia", serif;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 16px;}
+
+/* styling the background etc of the slider */
+input[type=range]::-webkit-slider-runnable-track {
+background: linear-gradient(90deg,  #fffbcf 0% calc(var(--targetval) - 12.5%), #ffa040 calc(var(--targetval) - 12.5%) calc(var(--targetval) - 7.5%), #e9ff40 calc(var(--targetval) - 7.5%) calc(var(--targetval) - 2.5%), #6f14b5 calc(var(--targetval) - 2.5%) calc(var(--targetval) + 2.5%), #e9ff40 calc(var(--targetval) + 2.5%) calc(var(--targetval) + 7.5%), #ffa040 calc(var(--targetval) + 7.5%) calc(var(--targetval) + 12.5%), #fffbcf calc(var(--targetval) + 12.5%) 100%);  border: 1.7px solid #010101;
+  border-radius: 25px;
+  width: 60%;
+  height: 15.2px;
+  cursor: pointer;
+}
+
+input[type=range] {
+  width: 100%;
+  margin: 1.8px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  margin-top: -2px;
+  width: 3px;
+  height: 25px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+input[type=range]::-moz-range-track {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 3px;
+  height: 25px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 2.8px 0;
+  color: transparent;
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type=range]::-ms-thumb {
+  width: 3px;
+  height: 25px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 0px;
+  /*Needed to keep the Edge thumb centred*/
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+@supports (-ms-ime-align:auto) {
+  /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+  input[type=range] {
+    margin: 0;
+    /*Edge starts the margin from the thumb, not the track as other browsers do*/
+  }
+}
+
+
+
+</style>
+
+    <script type='text/javascript'>
+		
+		var questions = Array(['Rare','Common'], ['Rare','Common'],['Loud','Quiet'],['Beautiful','Ugly'], ['Good','Evil'], ['Heavy','Light'],['Normal Greeting','Weird Greeting'], ['Unknown fact','Well known fact'], ['Pretentious','Down to earth'], ['Clever','Stupid'], ['Overpriced','Underpriced'],['Overrated','Underrated'], ['Job','Career'], ['Quiet Place','Loud Place'], ['Rough','Smooth'], ['Nasty Smell','Nice Smell'], ['Happy song','Sad song'], ['Useless','Useful'], ['Classic','Outdated'], ['Unsexy Emoji','Sexy Emoji'], ['Good habit','Bad habit'], ['90s','00s'], ['Historically Important','Historically Irrelevant'], ['Normal thing to own','Weird thing to own'], ['Not a sandwich','A sandwich'], ['Useful weapon','Useless weapon'], ['Bad pizza topping','Good pizza topping'], ['Bad advice','Good advice'], ['Better hot','Better cold'], ['Least evil company','Most evil company'], ['Guilty Pleasure','Openly love'], ['Useless kitchen gadget','Useful kitchen gadget'], ['Underrated letter of alphabet','Overrated letter of alphabet'], ['Lowbrow','Highbrow'], ['Hard to find','Easy to find'], ['Healthy','Unhealthy'], ['Waste of time','Good use of time'], ['Mainstream','Niche'], ['Looks like a person','Doesnt look like a person'], ['Hard to pronounce','Easy to pronounce'], ['Cheap','Expensive'], ['Round','Pointy'], ['Temporary','Permanent'], ['Worst year in history','Best year in history'], ['bad superpower','Good superpower'], ['Common name','Posh name']);
+		var thevalue = 0;
+		function newRound() {
+			number = Math.floor(Math.random() * questions.length)
+			question = questions[number];
+			
+			catleft = question[0]
+			catright = question[1]
+			thevalue = Math.floor(Math.random() * 101);
+			document.getElementById("catleft").innerHTML=catleft;
+						document.getElementById("catright").innerHTML=catright;
+						document.getElementById("slider").value=thevalue;
+						
+			slider.style.setProperty('--targetval', thevalue + '%')
+			goaltextdiv = document.getElementById("goal")
+			goaltextdiv.style.setProperty('--targetval', thevalue + '%')
+			goaltextdiv.innerHTML = thevalue;
+			
+			document.getElementById("teamguessheader").innerHTML = "Your team's guess:"
+			guessbox = document.getElementById("guessnumber")			
+			guessbox.value=0;
+			guessbox.disabled=false;
+			guessbox.style.backgroundColor = '#fffbcf';
+			guessbox.style.color = '#000000';
+			
+			
+			
+			thebutton = document.getElementById("bigbutton")
+			thebutton.innerHTML = "Submit guess";
+			thebutton.setAttribute( "onclick", "startGuess()" )	
+			
+						
+			document.getElementById("currentgame").style.display = "initial";
+		}
+		
+		function startGuess(){
+			thebutton = document.getElementById("bigbutton")
+			thebutton.innerHTML = "Sure?";
+			thebutton.setAttribute( "onclick", "testGuess()" )	
+		}
+		
+		function testGuess(){
+			guessbox = document.getElementById("guessnumber")
+			guessedscore = guessbox.value;
+			normalised = Math.abs(guessedscore - thevalue)*2;
+			thescore = 0;
+			boxcolour = '#fffbcf';
+			fontcolour = '#000000';
+			if (normalised < 5) {
+				thescore = 4;
+				boxcolour = '#6f14b5';
+				fontcolour = '#ffffff'
+			} else if (normalised < 15) {
+			  	thescore = 3;
+				boxcolour = '#e9ff40';
+			} else if (normalised < 25 ) {
+				thescore = 2;
+				boxcolour = '#ffa040';
+			}
+			else {
+				thescore = 0;
+			}
+			document.getElementById("teamguessheader").innerHTML = "Your score was:"			
+			guessbox.value=thescore;
+			guessbox.style.backgroundColor = boxcolour;
+			guessbox.style.color = fontcolour;
+			guessbox.disabled=true;
+			
+			thebutton = document.getElementById("bigbutton")
+			thebutton.innerHTML = "New game?";
+			thebutton.setAttribute( "onclick", "newRound()" )		
+		}	
+		
+		function firstRound(){
+			newRound();
+			document.getElementById("beginning").style.display = "none";
+			
+		}
+					
+	</script>
+</head>
+<body>
+	<h1>Wavelength</h1>
+	<div id="beginning">
+		<br />
+			<button onclick="firstRound()">Start a new game!</button>
+			<br />
+	</div>
+	<div id="currentgame">
+	<br />
+	<div id="slidercontainer">
+	<div id="catleft" class="rangediv"></div>
+	<div id="sliderwrapper">
+		<input type="range" id="slider" name="slider"
+         min="0" max="100" disabled>
+		 <div id='goal'></div>
+	</div>	 
+	<div id="catright" class="rangediv"></div>
+	</div>
+<br />
+<div id="teamguess">
+<h2 id="teamguessheader">Your team's guess:</h2>
+<input type="text" id="guessnumber" onfocus="this.value=''">
+<br />
+<button id="bigbutton" onclick="startGuess()">Submit guess</button><br />
+</div>
+</div>
+</body>
+</html>
